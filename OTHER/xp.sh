@@ -143,8 +143,8 @@ d1=$(date -d "$exp" +%s)
 d2=$(date -d "$now" +%s)
 exp2=$(( (d1 - d2) / 86400 ))
 if [[ "$exp2" = "0" ]]; then
-sed -i "s/### $user $exp/### $user $exp4/g" /etc/xray-mini/vless-direct.json
-sed -i "s/### $user $exp/### $user $exp4/g" /etc/xray-mini/vless-splice.json
+sed -i "/^### $user $exp/,/^},{/d" /etc/xray-mini/vless-direct.json
+sed -i "/^### $user $exp/,/^},{/d" /etc/xray-mini/vless-splice.json
 fi
 done
 systemctl restart xray-mini@vless-direct
